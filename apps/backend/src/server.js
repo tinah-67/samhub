@@ -25,7 +25,7 @@ app.use("/uploads", express.static(uploadRoot));
 
 app.get("/", (req, res) => {
   res.json({
-    name: "Samhub Creations API",
+    name: "SamHub Creations API",
     status: "running",
   });
 });
@@ -63,5 +63,5 @@ app.use((error, req, res, next) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Samhub Creations API running on port ${PORT}`);
+  console.log(`SamHub Creations API running on port ${PORT}`);
 });

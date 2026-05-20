@@ -1,6 +1,10 @@
 const bcrypt = require("bcrypt");
+const crypto = require("crypto");
+const path = require("path");
 const { PrismaPg } = require("@prisma/adapter-pg");
 const { PrismaClient } = require("@prisma/client");
+require("dotenv").config({ path: path.join(__dirname, "..", ".env") });
+const { sendMail } = require("../src/utils/mailer");
 
 const adapter = new PrismaPg({
   connectionString: process.env.DATABASE_URL,
@@ -17,24 +21,75 @@ const sampleImages = {
     "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80",
 };
 
+function createSetupCode() {
+  return String(crypto.randomInt(100000, 1000000));
+}
+
+async function sendSetupCode(user) {
+  const code = createSetupCode();
+  const codeHash = await bcrypt.hash(code, 12);
+  const expiresAt = new Date(Date.now() + 10 * 60 * 1000);
+
+  await prisma.authCode.updateMany({
+    where: {
+      userId: user.id,
+      purpose: "SETUP",
+      consumedAt: null,
+    },
+    data: {
+      consumedAt: new Date(),
+    },
+  });
+
+  await prisma.authCode.create({
+    data: {
+      userId: user.id,
+      purpose: "SETUP",
+      codeHash,
+      expiresAt,
+    },
+  });
+
+  await sendMail({
+    to: user.email,
+    subject: "Set up your SamHub admin account",
+    text: [
+      `Hello ${user.name},`,
+      "",
+      `Use this code to set your SamHub admin password: ${code}`,
+      "",
+      "This code expires in 10 minutes and can be used once.",
+    ].join("\n"),
+  });
+}
+
 async function main() {
-  const passwordHash = await bcrypt.hash(process.env.SEED_ADMIN_PASSWORD || "Admin12345", 12);
+  const adminEmail = (process.env.SEED_ADMIN_EMAIL || "admin@samhubcreations.com")
+    .toLowerCase()
+    .trim();
+  const adminName = process.env.SEED_ADMIN_NAME || "SamHub Admin";
+  const temporaryPassword = crypto.randomBytes(24).toString("hex");
+  const passwordHash = await bcrypt.hash(temporaryPassword, 12);
 
   const admin = await prisma.user.upsert({
-    where: { email: "admin@samhubcreations.com" },
+    where: { email: adminEmail },
     update: {
-      name: "Samhub Admin",
+      name: adminName,
       role: "ADMIN",
       isActive: true,
       passwordHash,
+      passwordMustChange: true,
     },
     create: {
-      name: "Samhub Admin",
-      email: "admin@samhubcreations.com",
+      name: adminName,
+      email: adminEmail,
       role: "ADMIN",
       passwordHash,
+      passwordMustChange: true,
     },
   });
+
+  await sendSetupCode(admin);
 
   const listings = [
     {

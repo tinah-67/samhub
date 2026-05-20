@@ -11,6 +11,7 @@ function publicUser(user) {
     phone: user.phone,
     role: user.role,
     isActive: user.isActive,
+    passwordMustChange: user.passwordMustChange,
     createdAt: user.createdAt,
     updatedAt: user.updatedAt,
   };

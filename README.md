@@ -1,4 +1,4 @@
-# Samhub Creations Platform
+# SamHub Creations Platform
 
 A modern brokerage management platform for managing and showcasing:
 
@@ -31,7 +31,7 @@ The platform allows the company to manage listings, inquiries, and internal oper
 - Manage listings
 - Upload listing images
 - Manage inquiries
-- Manage staff accounts
+- Manage internal accounts
 - Dashboard analytics (future)
 
 ---
@@ -131,7 +131,32 @@ Example:
 PORT=5000
 DATABASE_URL="postgresql://postgres:password@localhost:5432/samhub"
 JWT_SECRET=your_secret_key
+SEED_ADMIN_EMAIL="admin@samhubcreations.com"
+SEED_ADMIN_NAME="SamHub Admin"
+SMTP_HOST="smtp.example.com"
+SMTP_PORT=587
+SMTP_USER="smtp-user"
+SMTP_PASS="smtp-password"
+EMAIL_FROM="SamHub Creations <no-reply@example.com>"
 ```
+
+---
+
+# First Admin Account
+
+Apply the Prisma schema changes before using the admin login flow:
+
+```bash
+npm run prisma:migrate --workspace=backend
+```
+
+There is no public registration link. Create the first admin account with the seed script, then use `/admin/login` directly. The seed script emails a one-time setup code to `SEED_ADMIN_EMAIL`; in local development without SMTP configured, the code is printed in the backend console.
+
+```bash
+npm run seed --workspace=backend
+```
+
+After the first admin signs in, they can create additional internal accounts from the admin dashboard. New accounts receive a one-time setup code by email and set their own password.
 
 ---
 
@@ -192,10 +217,10 @@ npm run dev:backend
 
 # Project Goals
 
-The main goal of this platform is to provide a professional digital presence for Samhub Creations and streamline the management of brokerage assets and buyer inquiries.
+The main goal of this platform is to provide a professional digital presence for SamHub Creations and streamline the management of brokerage assets and buyer inquiries.
 
 ---
 
 # License
 
-This project is private and proprietary to Samhub Creations.
+This project is private and proprietary to SamHub Creations.

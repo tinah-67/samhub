@@ -1,7 +1,9 @@
 const bcrypt = require("bcrypt");
+const crypto = require("crypto");
 const express = require("express");
 const prisma = require("../lib/prisma");
 const { publicUser, requireAdmin, requireAuth } = require("../middleware/auth");
+const { issueAuthCode } = require("../utils/auth-codes");
 const asyncHandler = require("../utils/async-handler");
 
 const router = express.Router();
@@ -24,20 +26,21 @@ router.post(
   requireAuth,
   requireAdmin,
   asyncHandler(async (req, res) => {
-    const { name, email, phone, password } = req.body;
+    const { name, email, phone } = req.body;
     const role = req.body.role ? String(req.body.role).toUpperCase() : "STAFF";
 
-    if (!name || !email || !password) {
+    if (!name || !email) {
       return res
         .status(400)
-        .json({ message: "Name, email, and password are required" });
+        .json({ message: "Name and email are required" });
     }
 
     if (!roles.has(role)) {
-      return res.status(400).json({ message: "Invalid staff role" });
+      return res.status(400).json({ message: "Invalid account role" });
     }
 
-    const passwordHash = await bcrypt.hash(password, 12);
+    const temporaryPassword = crypto.randomBytes(24).toString("hex");
+    const passwordHash = await bcrypt.hash(temporaryPassword, 12);
 
     const user = await prisma.user.create({
       data: {
@@ -46,8 +49,11 @@ router.post(
         phone: phone ? String(phone).trim() : null,
         role,
         passwordHash,
+        passwordMustChange: true,
       },
     });
+
+    await issueAuthCode(user, "SETUP");
 
     return res.status(201).json({ staff: publicUser(user) });
   })
@@ -76,7 +82,7 @@ router.patch(
       const role = String(req.body.role).toUpperCase();
 
       if (!roles.has(role)) {
-        return res.status(400).json({ message: "Invalid staff role" });
+        return res.status(400).json({ message: "Invalid account role" });
       }
 
       data.role = role;
@@ -86,14 +92,26 @@ router.patch(
       data.isActive = Boolean(req.body.isActive);
     }
 
-    if (req.body.password) {
-      data.passwordHash = await bcrypt.hash(req.body.password, 12);
-    }
-
     const user = await prisma.user.update({
       where: { id: req.params.id },
       data,
     });
+
+    return res.json({ staff: publicUser(user) });
+  })
+);
+
+router.post(
+  "/:id/setup-code",
+  requireAuth,
+  requireAdmin,
+  asyncHandler(async (req, res) => {
+    const user = await prisma.user.update({
+      where: { id: req.params.id },
+      data: { passwordMustChange: true },
+    });
+
+    await issueAuthCode(user, "SETUP");
 
     return res.json({ staff: publicUser(user) });
   })

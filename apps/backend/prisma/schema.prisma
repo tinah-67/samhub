@@ -29,17 +29,37 @@ enum InquiryStatus {
   CLOSED
 }
 
+enum AuthCodePurpose {
+  LOGIN
+  SETUP
+}
+
 model User {
-  id           String    @id @default(cuid())
-  name         String
-  email        String    @unique
-  phone        String?
-  passwordHash String
-  role         UserRole  @default(STAFF)
-  isActive     Boolean   @default(true)
-  listings     Listing[]
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
+  id                 String     @id @default(cuid())
+  name               String
+  email              String     @unique
+  phone              String?
+  passwordHash       String
+  passwordMustChange Boolean    @default(false)
+  role               UserRole   @default(STAFF)
+  isActive           Boolean    @default(true)
+  listings           Listing[]
+  authCodes          AuthCode[]
+  createdAt          DateTime   @default(now())
+  updatedAt          DateTime   @updatedAt
+}
+
+model AuthCode {
+  id         String          @id @default(cuid())
+  userId     String
+  user       User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  purpose    AuthCodePurpose
+  codeHash   String
+  expiresAt  DateTime
+  consumedAt DateTime?
+  createdAt  DateTime        @default(now())
+
+  @@index([userId, purpose, expiresAt])
 }
 
 model Listing {
