@@ -17,9 +17,20 @@ router.post(
         .json({ message: "Name, phone, and message are required" });
     }
 
+    let savedListingId = listingId ? String(listingId).trim() : null;
+
+    if (savedListingId) {
+      const listing = await prisma.listing.findUnique({
+        where: { id: savedListingId },
+        select: { id: true },
+      });
+
+      savedListingId = listing ? listing.id : null;
+    }
+
     const inquiry = await prisma.inquiry.create({
       data: {
-        listingId: listingId || null,
+        listingId: savedListingId,
         name: String(name).trim(),
         email: email ? String(email).trim().toLowerCase() : null,
         phone: String(phone).trim(),

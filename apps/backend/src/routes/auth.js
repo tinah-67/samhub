@@ -30,13 +30,14 @@ router.post(
       return res.status(401).json({ message: "Invalid email or password" });
     }
 
-    const { expiresAt } = await issueAuthCode(user, "LOGIN");
+    const { expiresAt, devCode } = await issueAuthCode(user, "LOGIN");
 
     return res.json({
       verificationRequired: true,
       email: user.email,
       expiresAt,
       expiresInMinutes: CODE_TTL_MINUTES,
+      devCode,
     });
   })
 );

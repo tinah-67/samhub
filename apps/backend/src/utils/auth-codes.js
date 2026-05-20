@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 const crypto = require("crypto");
 const prisma = require("../lib/prisma");
-const { sendMail } = require("./mailer");
+const { hasSmtpConfig, sendMail } = require("./mailer");
 
 const CODE_TTL_MINUTES = 10;
 
@@ -67,7 +67,10 @@ async function issueAuthCode(user, purpose) {
     text: messageForPurpose(user, code, purpose),
   });
 
-  return { expiresAt };
+  return {
+    expiresAt,
+    devCode: !hasSmtpConfig() && process.env.NODE_ENV !== "production" ? code : undefined,
+  };
 }
 
 async function verifyAuthCode(userId, purpose, code) {

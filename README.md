@@ -131,8 +131,9 @@ Example:
 PORT=5000
 DATABASE_URL="postgresql://postgres:password@localhost:5432/samhub"
 JWT_SECRET=your_secret_key
-SEED_ADMIN_EMAIL="admin@samhubcreations.com"
+SEED_ADMIN_EMAIL="c12515124@gmail.com"
 SEED_ADMIN_NAME="SamHub Admin"
+SEED_ADMIN_PASSWORD="Tina1234"
 SMTP_HOST="smtp.example.com"
 SMTP_PORT=587
 SMTP_USER="smtp-user"
@@ -150,7 +151,9 @@ Apply the Prisma schema changes before using the admin login flow:
 npm run prisma:migrate --workspace=backend
 ```
 
-There is no public registration link. Create the first admin account with the seed script, then use `/admin/login` directly. The seed script emails a one-time setup code to `SEED_ADMIN_EMAIL`; in local development without SMTP configured, the code is printed in the backend console.
+There is no public registration link. Create the first admin account with the seed script, then use `/admin/login` directly. By default, the seed script creates the admin user with `c12515124@gmail.com` and password `Tina1234`.
+
+The login flow still sends a one-time login code to the admin email. In local development without SMTP configured, the code is shown on the login page and printed in the backend console instead.
 
 ```bash
 npm run seed --workspace=backend
