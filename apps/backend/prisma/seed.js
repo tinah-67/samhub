@@ -7,8 +7,7 @@ const DEFAULT_ADMIN_EMAIL = "c12515124@gmail.com";
 const DEFAULT_ADMIN_PASSWORD = "Tina1234";
 
 const sampleImages = {
-  vehicle:
-    "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1200&q=80",
+  vehicle: "/listings/benz-kdg-008.jpeg",
   house:
     "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
   land:
@@ -49,7 +48,7 @@ async function main() {
       status: "PUBLISHED",
       description:
         "A clean, well-maintained executive sedan suitable for daily city driving and client-facing business use.",
-      price: "4850000",
+      price: "2800000",
       location: "Nairobi, Kenya",
       featured: true,
       imageUrls: [sampleImages.vehicle],
@@ -69,7 +68,7 @@ async function main() {
       status: "PUBLISHED",
       description:
         "A bright family residence with generous living areas, secure parking, and quick access to key amenities.",
-      price: "28500000",
+      price: "12500000",
       location: "Kiambu Road, Kenya",
       featured: true,
       imageUrls: [sampleImages.house],
@@ -86,7 +85,7 @@ async function main() {
       status: "PUBLISHED",
       description:
         "A strategically positioned residential land parcel with access roads, utilities nearby, and strong growth potential.",
-      price: "6200000",
+      price: "2500000",
       location: "Athi River, Kenya",
       featured: false,
       imageUrls: [sampleImages.land],
