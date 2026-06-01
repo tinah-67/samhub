@@ -53,6 +53,18 @@ function nullablePrice(value) {
   return Number.isFinite(number) ? String(number) : undefined;
 }
 
+function listingOrder(sort) {
+  if (sort === "price-asc") {
+    return [{ price: "asc" }, { featured: "desc" }, { createdAt: "desc" }];
+  }
+
+  if (sort === "price-desc") {
+    return [{ price: "desc" }, { featured: "desc" }, { createdAt: "desc" }];
+  }
+
+  return [{ featured: "desc" }, { createdAt: "desc" }];
+}
+
 async function uniqueSlug(title, preferredSlug, currentId) {
   const base = slugify(preferredSlug || title) || `listing-${Date.now()}`;
   let candidate = base;
@@ -201,6 +213,21 @@ router.get(
       where.featured = req.query.featured === "true";
     }
 
+    const minPrice = nullablePrice(req.query.minPrice);
+    const maxPrice = nullablePrice(req.query.maxPrice);
+
+    if (minPrice !== undefined || maxPrice !== undefined) {
+      where.price = {};
+
+      if (minPrice !== undefined) {
+        where.price.gte = minPrice;
+      }
+
+      if (maxPrice !== undefined) {
+        where.price.lte = maxPrice;
+      }
+    }
+
     if (req.query.q) {
       const query = String(req.query.q).trim();
 
@@ -213,7 +240,7 @@ router.get(
 
     const listings = await prisma.listing.findMany({
       where,
-      orderBy: [{ featured: "desc" }, { createdAt: "desc" }],
+      orderBy: listingOrder(req.query.sort),
     });
 
     return res.json({ listings });

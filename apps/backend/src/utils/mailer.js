@@ -24,14 +24,16 @@ async function sendMail({ to, subject, text }) {
   const transporter = createTransporter();
 
   if (!transporter) {
-    if (process.env.NODE_ENV === "production") {
-      throw new Error("SMTP email is not configured");
+    if (process.env.NODE_ENV !== "production") {
+      console.log(`[dev email] To: ${to}`);
+      console.log(`[dev email] Subject: ${subject}`);
+      console.log(`[dev email]\n${text}`);
+      return;
     }
 
-    console.log(`[dev email] To: ${to}`);
-    console.log(`[dev email] Subject: ${subject}`);
-    console.log(`[dev email]\n${text}`);
-    return;
+    const error = new Error("SMTP email is not configured");
+    error.status = 503;
+    throw error;
   }
 
   await transporter.sendMail({

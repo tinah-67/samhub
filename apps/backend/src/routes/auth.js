@@ -4,6 +4,7 @@ const prisma = require("../lib/prisma");
 const { publicUser, requireAuth, signToken } = require("../middleware/auth");
 const { CODE_TTL_MINUTES, issueAuthCode, verifyAuthCode } = require("../utils/auth-codes");
 const asyncHandler = require("../utils/async-handler");
+const { isValidEmail, passwordValidationMessage } = require("../utils/validation");
 
 const router = express.Router();
 
@@ -14,6 +15,10 @@ router.post(
 
     if (!email || !password) {
       return res.status(400).json({ message: "Email and password are required" });
+    }
+
+    if (!isValidEmail(email)) {
+      return res.status(400).json({ message: "Enter a valid email address" });
     }
 
     const user = await prisma.user.findUnique({
@@ -51,6 +56,10 @@ router.post(
       return res.status(400).json({ message: "Email and code are required" });
     }
 
+    if (!isValidEmail(email)) {
+      return res.status(400).json({ message: "Enter a valid email address" });
+    }
+
     const user = await prisma.user.findUnique({
       where: { email: String(email).toLowerCase().trim() },
     });
@@ -81,8 +90,14 @@ router.post(
       return res.status(400).json({ message: "Email, code, and new password are required" });
     }
 
-    if (String(newPassword).length < 8) {
-      return res.status(400).json({ message: "Password must be at least 8 characters" });
+    if (!isValidEmail(email)) {
+      return res.status(400).json({ message: "Enter a valid email address" });
+    }
+
+    const passwordMessage = passwordValidationMessage(newPassword);
+
+    if (passwordMessage) {
+      return res.status(400).json({ message: passwordMessage });
     }
 
     const user = await prisma.user.findUnique({
@@ -125,8 +140,10 @@ router.post(
       return res.status(400).json({ message: "Current password and new password are required" });
     }
 
-    if (String(newPassword).length < 8) {
-      return res.status(400).json({ message: "Password must be at least 8 characters" });
+    const passwordMessage = passwordValidationMessage(newPassword);
+
+    if (passwordMessage) {
+      return res.status(400).json({ message: passwordMessage });
     }
 
     const user = await prisma.user.findUnique({

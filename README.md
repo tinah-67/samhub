@@ -153,7 +153,7 @@ npm run prisma:migrate --workspace=backend
 
 There is no public registration link. Create the first admin account with the seed script, then use `/admin/login` directly. By default, the seed script creates the admin user with `c12515124@gmail.com` and password `Tina1234`.
 
-The login flow still sends a one-time login code to the admin email. In local development without SMTP configured, the code is shown on the login page and printed in the backend console instead.
+The login flow sends a one-time login code to the admin email. SMTP must be configured for admin login codes and setup codes to be delivered.
 
 ```bash
 npm run seed --workspace=backend

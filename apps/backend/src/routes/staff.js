@@ -5,6 +5,7 @@ const prisma = require("../lib/prisma");
 const { publicUser, requireAdmin, requireAuth } = require("../middleware/auth");
 const { issueAuthCode } = require("../utils/auth-codes");
 const asyncHandler = require("../utils/async-handler");
+const { isValidEmail, isValidUserName } = require("../utils/validation");
 
 const router = express.Router();
 const roles = new Set(["ADMIN", "STAFF"]);
@@ -33,6 +34,14 @@ router.post(
       return res
         .status(400)
         .json({ message: "Name and email are required" });
+    }
+
+    if (!isValidUserName(name)) {
+      return res.status(400).json({ message: "Name can only contain letters and spaces" });
+    }
+
+    if (!isValidEmail(email)) {
+      return res.status(400).json({ message: "Enter a valid email address" });
     }
 
     if (!roles.has(role)) {
@@ -67,10 +76,18 @@ router.patch(
     const data = {};
 
     if (req.body.name !== undefined) {
+      if (!isValidUserName(req.body.name)) {
+        return res.status(400).json({ message: "Name can only contain letters and spaces" });
+      }
+
       data.name = String(req.body.name).trim();
     }
 
     if (req.body.email !== undefined) {
+      if (!isValidEmail(req.body.email)) {
+        return res.status(400).json({ message: "Enter a valid email address" });
+      }
+
       data.email = String(req.body.email).toLowerCase().trim();
     }
 
