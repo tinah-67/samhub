@@ -1,6 +1,6 @@
 const express = require("express");
 const prisma = require("../lib/prisma");
-const { optionalAuth, requireAuth } = require("../middleware/auth");
+const { optionalAuth, requireAdmin, requireAuth } = require("../middleware/auth");
 const asyncHandler = require("../utils/async-handler");
 const slugify = require("../utils/slug");
 
@@ -268,6 +268,7 @@ router.get(
 router.post(
   "/",
   requireAuth,
+  requireAdmin,
   asyncHandler(async (req, res) => {
     const data = await listingData(req.body, "create");
 
@@ -285,6 +286,7 @@ router.post(
 router.patch(
   "/:id",
   requireAuth,
+  requireAdmin,
   asyncHandler(async (req, res) => {
     const data = await listingData(req.body, "update", req.params.id);
 
@@ -300,6 +302,7 @@ router.patch(
 router.delete(
   "/:id",
   requireAuth,
+  requireAdmin,
   asyncHandler(async (req, res) => {
     const listing = await prisma.listing.update({
       where: { id: req.params.id },

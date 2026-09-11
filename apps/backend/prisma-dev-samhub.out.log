@@ -1,0 +1,326 @@
+[State] using data directory: C:\Users\walker\AppData\Local\prisma-dev-nodejs\Data/samhub
+[State] obtained lock on: C:\Users\walker\AppData\Local\prisma-dev-nodejs\Data/samhub
+[State] scanning for server states in: C:/Users/walker/AppData/Local/prisma-dev-nodejs/Data
+[State] found server names: ["default","samhub"]
+[State] server dump file found at "C:/Users/walker/AppData/Local/prisma-dev-nodejs/Data/default/server.json":
+{
+  "name": "default",
+  "version": "1",
+  "pid": 1240,
+  "port": 51213,
+  "databasePort": 51214,
+  "experimental": {
+    "streams": {
+      "serverUrl": "http://127.0.0.1:51216",
+      "sqlitePath": "C:\\Users\\walker\\AppData\\Local\\prisma-dev-nodejs\\Data\\durable-streams\\default\\durable-streams.sqlite",
+      "streamName": "prisma-wal",
+      "url": "http://127.0.0.1:51216/v1/stream/prisma-wal"
+    }
+  },
+  "shadowDatabasePort": 51215,
+  "exports": {
+    "database": {
+      "connectionString": "postgres://postgres:postgres@localhost:51214/template1?sslmode=disable",
+      "prismaORMConnectionString": "postgres://postgres:postgres@localhost:51214/template1?sslmode=disable&connection_limit=10&connect_timeout=0&max_idle_connection_lifetime=0&pool_timeout=0&socket_timeout=0",
+      "terminalCommand": "PGPASSWORD=postgres PGSSLMODE=disable psql -h localhost -p 51214 -U postgres -d template1"
+    },
+    "http": {
+      "url": "http://localhost:51213"
+    },
+    "ppg": {
+      "url": "prisma+postgres://localhost:51213/?api_key=eyJkYXRhYmFzZVVybCI6InBvc3RncmVzOi8vcG9zdGdyZXM6cG9zdGdyZXNAbG9jYWxob3N0OjUxMjE0L3RlbXBsYXRlMT9zc2xtb2RlPWRpc2FibGUmY29ubmVjdGlvbl9saW1pdD0xMCZjb25uZWN0X3RpbWVvdXQ9MCZtYXhfaWRsZV9jb25uZWN0aW9uX2xpZmV0aW1lPTAmcG9vbF90aW1lb3V0PTAmc29ja2V0X3RpbWVvdXQ9MCIsIm5hbWUiOiJkZWZhdWx0Iiwic2hhZG93RGF0YWJhc2VVcmwiOiJwb3N0Z3JlczovL3Bvc3RncmVzOnBvc3RncmVzQGxvY2FsaG9zdDo1MTIxNS90ZW1wbGF0ZTE_c3NsbW9kZT1kaXNhYmxlJmNvbm5lY3Rpb25fbGltaXQ9MTAmY29ubmVjdF90aW1lb3V0PTAmbWF4X2lkbGVfY29ubmVjdGlvbl9saWZldGltZT0wJnBvb2xfdGltZW91dD0wJnNvY2tldF90aW1lb3V0PTAifQ"
+    },
+    "shadowDatabase": {
+      "connectionString": "postgres://postgres:postgres@localhost:51215/template1?sslmode=disable&connection_limit=10&connect_timeout=0&max_idle_connection_lifetime=0&pool_timeout=0&socket_timeout=0",
+      "prismaORMConnectionString": "postgres://postgres:postgres@localhost:51215/template1?sslmode=disable&connection_limit=10&connect_timeout=0&max_idle_connection_lifetime=0&pool_timeout=0&socket_timeout=0",
+      "terminalCommand": "PGPASSWORD=postgres PGSSLMODE=disable psql -h localhost -p 51215 -U postgres -d template1"
+    }
+  }
+}
+
+[State] server dump file found at "C:/Users/walker/AppData/Local/prisma-dev-nodejs/Data/samhub/server.json":
+{
+  "name": "samhub",
+  "version": "1",
+  "pid": 10268,
+  "port": 51217,
+  "databasePort": 51218,
+  "experimental": {
+    "streams": {
+      "serverUrl": "http://127.0.0.1:51220",
+      "sqlitePath": "C:\\Users\\walker\\AppData\\Local\\prisma-dev-nodejs\\Data\\durable-streams\\samhub\\durable-streams.sqlite",
+      "streamName": "prisma-wal",
+      "url": "http://127.0.0.1:51220/v1/stream/prisma-wal"
+    }
+  },
+  "shadowDatabasePort": 51219,
+  "exports": {
+    "database": {
+      "connectionString": "postgres://postgres:postgres@localhost:51218/template1?sslmode=disable",
+      "prismaORMConnectionString": "postgres://postgres:postgres@localhost:51218/template1?sslmode=disable&connection_limit=10&connect_timeout=0&max_idle_connection_lifetime=0&pool_timeout=0&socket_timeout=0",
+      "terminalCommand": "PGPASSWORD=postgres PGSSLMODE=disable psql -h localhost -p 51218 -U postgres -d template1"
+    },
+    "http": {
+      "url": "http://localhost:51217"
+    },
+    "ppg": {
+      "url": "prisma+postgres://localhost:51217/?api_key=eyJuYW1lIjoic2FtaHViIiwiZGF0YWJhc2VVcmwiOiJwb3N0Z3JlczovL3Bvc3RncmVzOnBvc3RncmVzQGxvY2FsaG9zdDo1MTIxOC90ZW1wbGF0ZTE_c3NsbW9kZT1kaXNhYmxlJmNvbm5lY3Rpb25fbGltaXQ9MTAmY29ubmVjdF90aW1lb3V0PTAmbWF4X2lkbGVfY29ubmVjdGlvbl9saWZldGltZT0wJnBvb2xfdGltZW91dD0wJnNvY2tldF90aW1lb3V0PTAiLCJzaGFkb3dEYXRhYmFzZVVybCI6InBvc3RncmVzOi8vcG9zdGdyZXM6cG9zdGdyZXNAbG9jYWxob3N0OjUxMjE5L3RlbXBsYXRlMT9zc2xtb2RlPWRpc2FibGUmY29ubmVjdGlvbl9saW1pdD0xMCZjb25uZWN0X3RpbWVvdXQ9MCZtYXhfaWRsZV9jb25uZWN0aW9uX2xpZmV0aW1lPTAmcG9vbF90aW1lb3V0PTAmc29ja2V0X3RpbWVvdXQ9MCJ9"
+    },
+    "shadowDatabase": {
+      "connectionString": "postgres://postgres:postgres@localhost:51219/template1?sslmode=disable&connection_limit=10&connect_timeout=0&max_idle_connection_lifetime=0&pool_timeout=0&socket_timeout=0",
+      "prismaORMConnectionString": "postgres://postgres:postgres@localhost:51219/template1?sslmode=disable&connection_limit=10&connect_timeout=0&max_idle_connection_lifetime=0&pool_timeout=0&socket_timeout=0",
+      "terminalCommand": "PGPASSWORD=postgres PGSSLMODE=disable psql -h localhost -p 51219 -U postgres -d template1"
+    }
+  }
+}
+
+ports used by other servers: 51213, 51214, 51215, 51216
+ports used by "samhub" server last time: {"databasePort":51218,"port":51217,"shadowDatabasePort":51219,"streamsPort":51220}
+Using port 51217 for "port" as it was used last time and is available.
+Got port for "port": 51217
+Using port 51218 for "databasePort" as it was used last time and is available.
+Got port for "databasePort": 51218
+Using port 51219 for "shadowDatabasePort" as it was used last time and is available.
+Got port for "shadowDatabasePort": 51219
+Using port 51220 for "streamsPort" as it was used last time and is available.
+Got port for "streamsPort": 51220
+Picked ports: {"databasePort":51218,"port":51217,"shadowDatabasePort":51219,"streamsPort":51220}
+pglite: no db in filesystem, running initdb
+initdb:  calling initdb.main with [
+  '--allow-group-access',
+  '--encoding',
+  'UTF8',
+  '--locale=C.UTF-8',
+  '--locale-provider=libc',
+  '--auth=trust'
+]
+initdb:  initdb: firstArg /pglite/bin/postgres
+initdb:  executing pg main with [ '-V' ]
+initdb:  0
+initdb:  initdbout The files belonging to this database system will be owned by user "web_user".
+initdb:  initdbout This user must also own the server process.
+initdb:  initdbout 
+initdb:  initdbout The database cluster will be initialized with this locale configuration:
+initdb:  initdbout   locale provider:   libc
+initdb:  initdbout   LC_COLLATE:  C
+initdb:  initdbout   LC_CTYPE:    C.UTF-8
+initdb:  initdbout   LC_MESSAGES: C
+initdb:  initdbout   LC_MONETARY: C
+initdb:  initdbout   LC_NUMERIC:  C
+initdb:  initdbout   LC_TIME:     C
+initdb:  initdbout The default text search configuration will be set to "english".
+initdb:  initdbout 
+initdb:  initdbout Data page checksums are disabled.
+initdb:  initdbout 
+initdb:  initdbout creating directory /pglite/data ... ok
+initdb:  initdbout creating subdirectories ... ok
+initdb:  initdbout selecting dynamic shared memory implementation ... posix
+initdb:  initdb: firstArg /pglite/bin/postgres
+initdb:  executing pg main with [
+  '--check',
+  '-F',
+  '-c',
+  'log_checkpoints=false',
+  '-c',
+  'max_connections=100',
+  '-c',
+  'shared_buffers=1000',
+  '-c',
+  'dynamic_shared_memory_type=posix'
+]
+initdb:  0
+initdb:  initdbout selecting default "max_connections" ... 100
+initdb:  initdb: firstArg /pglite/bin/postgres
+initdb:  executing pg main with [
+  '--check',
+  '-F',
+  '-c',
+  'log_checkpoints=false',
+  '-c',
+  'max_connections=100',
+  '-c',
+  'shared_buffers=16384',
+  '-c',
+  'dynamic_shared_memory_type=posix'
+]
+initdb:  0
+initdb:  initdbout selecting default "shared_buffers" ... 128MB
+initdb:  initdbout selecting default time zone ... Etc/GMT-3
+initdb:  initdbout creating configuration files ... ok
+initdb:  initdb: firstArg /pglite/bin/postgres
+initdb:  executing pg main with [ '--boot', '-F', '-c', 'log_checkpoints=false', '-X', '16777216' ]
+initdb:  0
+initdb:  initdbout running bootstrap script ... ok
+initdb:  initdb: firstArg /pglite/bin/postgres
+initdb:  executing pg main with [
+  '--single',
+  '-F',
+  '-O',
+  '-j',
+  '-c',
+  'search_path=pg_catalog',
+  '-c',
+  'exit_on_error=true',
+  '-c',
+  'log_checkpoints=false',
+  'template1'
+]
+pclose_fn 162844296
+initdb:  0
+initdb:  initdbout performing post-bootstrap initialization ... ok
+initdb:  initdbout syncing data to disk ... ok
+initdb:  initdbout 
+initdb:  initdbout Success. You can now start the database server using:
+initdb:  initdbout 
+initdb:  initdbout     /pglite/bin/pg_ctl -D /pglite/data -l logfile start
+initdb:  initdbout 
+ExitStatus {
+  name: 'ExitStatus',
+  message: 'Program terminated with exit(0)',
+  status: 0
+}
+pglite: found DB, resuming
+pgfs:ext preloading /pglite/lib/postgresql/amcheck.so
+pgfs:ext preloading /pglite/lib/postgresql/bloom.so
+pgfs:ext preloading /pglite/lib/postgresql/btree_gin.so
+pgfs:ext OK /pglite/lib/postgresql/amcheck.so []
+pgfs:ext preloading /pglite/lib/postgresql/amcheck.so
+pgfs:ext preloading /pglite/lib/postgresql/bloom.so
+pgfs:ext preloading /pglite/lib/postgresql/btree_gin.so
+pgfs:ext OK /pglite/lib/postgresql/bloom.so []
+pgfs:ext OK /pglite/lib/postgresql/amcheck.so []
+pgfs:ext preloading /pglite/lib/postgresql/btree_gist.so
+pgfs:ext preloading /pglite/lib/postgresql/citext.so
+pgfs:ext preloading /pglite/lib/postgresql/cube.so
+pgfs:ext preloading /pglite/lib/postgresql/dict_int.so
+pgfs:ext preloading /pglite/lib/postgresql/dict_xsyn.so
+pgfs:ext preloading /pglite/lib/postgresql/earthdistance.so
+pgfs:ext preloading /pglite/lib/postgresql/file_fdw.so
+pgfs:ext preloading /pglite/lib/postgresql/fuzzystrmatch.so
+pgfs:ext preloading /pglite/lib/postgresql/hstore.so
+pgfs:ext preloading /pglite/lib/postgresql/_int.so
+pgfs:ext OK /pglite/lib/postgresql/bloom.so []
+pgfs:ext OK /pglite/lib/postgresql/btree_gin.so []
+pgfs:ext OK /pglite/lib/postgresql/btree_gin.so []
+pgfs:ext preloading /pglite/lib/postgresql/isn.so
+pgfs:ext preloading /pglite/lib/postgresql/lo.so
+pgfs:ext preloading /pglite/lib/postgresql/ltree.so
+pgfs:ext preloading /pglite/lib/postgresql/pageinspect.so
+pgfs:ext preloading /pglite/lib/postgresql/pg_buffercache.so
+pgfs:ext preloading /pglite/lib/postgresql/pg_freespacemap.so
+pgfs:ext preloading /pglite/lib/postgresql/pg_surgery.so
+pgfs:ext preloading /pglite/lib/postgresql/pg_trgm.so
+pgfs:ext preloading /pglite/lib/postgresql/pg_visibility.so
+pgfs:ext preloading /pglite/lib/postgresql/pg_walinspect.so
+pgfs:ext preloading /pglite/lib/postgresql/seg.so
+pgfs:ext preloading /pglite/lib/postgresql/tablefunc.so
+pgfs:ext preloading /pglite/lib/postgresql/tcn.so
+pgfs:ext preloading /pglite/lib/postgresql/tsm_system_rows.so
+pgfs:ext preloading /pglite/lib/postgresql/tsm_system_time.so
+pgfs:ext preloading /pglite/lib/postgresql/unaccent.so
+pgfs:ext preloading /pglite/lib/postgresql/uuid-ossp.so
+pgfs:ext OK /pglite/lib/postgresql/btree_gist.so []
+pgfs:ext preloading /pglite/lib/postgresql/btree_gist.so
+pgfs:ext preloading /pglite/lib/postgresql/citext.so
+pgfs:ext preloading /pglite/lib/postgresql/cube.so
+pgfs:ext preloading /pglite/lib/postgresql/dict_int.so
+pgfs:ext preloading /pglite/lib/postgresql/dict_xsyn.so
+pgfs:ext preloading /pglite/lib/postgresql/earthdistance.so
+pgfs:ext preloading /pglite/lib/postgresql/file_fdw.so
+pgfs:ext preloading /pglite/lib/postgresql/fuzzystrmatch.so
+pgfs:ext preloading /pglite/lib/postgresql/hstore.so
+pgfs:ext preloading /pglite/lib/postgresql/_int.so
+pgfs:ext OK /pglite/lib/postgresql/btree_gist.so []
+pgfs:ext OK /pglite/lib/postgresql/citext.so []
+pgfs:ext OK /pglite/lib/postgresql/citext.so []
+pgfs:ext preloading /pglite/lib/postgresql/vector.so
+pgfs:ext preloading /pglite/lib/postgresql/isn.so
+pgfs:ext preloading /pglite/lib/postgresql/lo.so
+pgfs:ext preloading /pglite/lib/postgresql/ltree.so
+pgfs:ext preloading /pglite/lib/postgresql/pageinspect.so
+pgfs:ext preloading /pglite/lib/postgresql/pg_buffercache.so
+pgfs:ext preloading /pglite/lib/postgresql/pg_freespacemap.so
+pgfs:ext preloading /pglite/lib/postgresql/pg_surgery.so
+pgfs:ext preloading /pglite/lib/postgresql/pg_trgm.so
+pgfs:ext preloading /pglite/lib/postgresql/pg_visibility.so
+pgfs:ext preloading /pglite/lib/postgresql/pg_walinspect.so
+pgfs:ext preloading /pglite/lib/postgresql/seg.so
+pgfs:ext preloading /pglite/lib/postgresql/tablefunc.so
+pgfs:ext preloading /pglite/lib/postgresql/tcn.so
+pgfs:ext preloading /pglite/lib/postgresql/tsm_system_rows.so
+pgfs:ext preloading /pglite/lib/postgresql/tsm_system_time.so
+pgfs:ext preloading /pglite/lib/postgresql/unaccent.so
+pgfs:ext preloading /pglite/lib/postgresql/uuid-ossp.so
+pgfs:ext OK /pglite/lib/postgresql/cube.so []
+pgfs:ext OK /pglite/lib/postgresql/cube.so []
+pgfs:ext preloading /pglite/lib/postgresql/vector.so
+pgfs:ext OK /pglite/lib/postgresql/dict_int.so []
+pgfs:ext OK /pglite/lib/postgresql/dict_int.so []
+pgfs:ext OK /pglite/lib/postgresql/dict_xsyn.so []
+pgfs:ext OK /pglite/lib/postgresql/dict_xsyn.so []
+pgfs:ext OK /pglite/lib/postgresql/earthdistance.so []
+pgfs:ext OK /pglite/lib/postgresql/earthdistance.so []
+pgfs:ext OK /pglite/lib/postgresql/file_fdw.so []
+pgfs:ext OK /pglite/lib/postgresql/file_fdw.so []
+pgfs:ext OK /pglite/lib/postgresql/fuzzystrmatch.so []
+pgfs:ext OK /pglite/lib/postgresql/fuzzystrmatch.so []
+pgfs:ext OK /pglite/lib/postgresql/hstore.so []
+pgfs:ext OK /pglite/lib/postgresql/hstore.so []
+pgfs:ext OK /pglite/lib/postgresql/_int.so []
+pgfs:ext OK /pglite/lib/postgresql/_int.so []
+pgfs:ext OK /pglite/lib/postgresql/isn.so []
+pgfs:ext OK /pglite/lib/postgresql/isn.so []
+pgfs:ext OK /pglite/lib/postgresql/lo.so []
+pgfs:ext OK /pglite/lib/postgresql/lo.so []
+pgfs:ext OK /pglite/lib/postgresql/ltree.so []
+pgfs:ext OK /pglite/lib/postgresql/ltree.so []
+pgfs:ext OK /pglite/lib/postgresql/pageinspect.so []
+pgfs:ext OK /pglite/lib/postgresql/pageinspect.so []
+pgfs:ext OK /pglite/lib/postgresql/pg_buffercache.so []
+pgfs:ext OK /pglite/lib/postgresql/pg_buffercache.so []
+pgfs:ext OK /pglite/lib/postgresql/pg_freespacemap.so []
+pgfs:ext OK /pglite/lib/postgresql/pg_freespacemap.so []
+pgfs:ext OK /pglite/lib/postgresql/pg_surgery.so []
+pgfs:ext OK /pglite/lib/postgresql/pg_surgery.so []
+pgfs:ext OK /pglite/lib/postgresql/pg_trgm.so []
+pgfs:ext OK /pglite/lib/postgresql/pg_trgm.so []
+pgfs:ext OK /pglite/lib/postgresql/pg_visibility.so []
+pgfs:ext OK /pglite/lib/postgresql/pg_visibility.so []
+pgfs:ext OK /pglite/lib/postgresql/pg_walinspect.so []
+pgfs:ext OK /pglite/lib/postgresql/pg_walinspect.so []
+pgfs:ext OK /pglite/lib/postgresql/seg.so []
+pgfs:ext OK /pglite/lib/postgresql/seg.so []
+pgfs:ext OK /pglite/lib/postgresql/tablefunc.so []
+pgfs:ext OK /pglite/lib/postgresql/tablefunc.so []
+pgfs:ext OK /pglite/lib/postgresql/tcn.so []
+pgfs:ext OK /pglite/lib/postgresql/tcn.so []
+pgfs:ext OK /pglite/lib/postgresql/tsm_system_rows.so []
+pgfs:ext OK /pglite/lib/postgresql/tsm_system_rows.so []
+pgfs:ext OK /pglite/lib/postgresql/tsm_system_time.so []
+pgfs:ext OK /pglite/lib/postgresql/tsm_system_time.so []
+pgfs:ext OK /pglite/lib/postgresql/unaccent.so []
+pgfs:ext OK /pglite/lib/postgresql/unaccent.so []
+pgfs:ext OK /pglite/lib/postgresql/uuid-ossp.so []
+pgfs:ext OK /pglite/lib/postgresql/uuid-ossp.so []
+pgfs:ext OK /pglite/lib/postgresql/vector.so []
+pgfs:ext OK /pglite/lib/postgresql/vector.so []
+
+PostgreSQL stand-alone backend 17.5
+runQuery 
+      SELECT b.oid, b.typarray
+      FROM pg_catalog.pg_type a
+      LEFT JOIN pg_catalog.pg_type b ON b.oid = a.typelem
+      WHERE a.typcategory = 'A'
+      GROUP BY b.oid, b.typarray
+      ORDER BY b.oid
+     [] undefined
+runQuery SELECT EXISTS(SELECT 1 FROM pg_roles WHERE rolname = 'postgres') AS exists [] undefined
+runExec CREATE ROLE postgres WITH LOGIN SUPERUSER PASSWORD 'postgres' undefined
+runExec SET ROLE postgres undefined
+[State] released lock on: C:\Users\walker\AppData\Local\prisma-dev-nodejs\Data/samhub
+[PGLiteSocketServer] constructor: created server on 127.0.0.1:51219
+[PGLiteSocketServer] constructor: max connections: 10
+[PGLiteSocketServer] start: starting server on 127.0.0.1:51219
+[PGLiteSocketServer] start: server listening on 127.0.0.1:51219
+[shadow_database] server listening on {"port":51219,"host":"127.0.0.1"}
+[shadow_database] server started on port 51219

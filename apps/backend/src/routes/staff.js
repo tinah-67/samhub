@@ -10,6 +10,18 @@ const { isValidEmail, isValidUserName } = require("../utils/validation");
 const router = express.Router();
 const roles = new Set(["ADMIN", "STAFF"]);
 
+function booleanValue(value) {
+  if (typeof value === "boolean") {
+    return value;
+  }
+
+  if (typeof value === "string") {
+    return value.toLowerCase() === "true";
+  }
+
+  return Boolean(value);
+}
+
 router.get(
   "/",
   requireAuth,
@@ -74,6 +86,7 @@ router.patch(
   requireAdmin,
   asyncHandler(async (req, res) => {
     const data = {};
+    const isSelf = req.params.id === req.user.id;
 
     if (req.body.name !== undefined) {
       if (!isValidUserName(req.body.name)) {
@@ -102,11 +115,21 @@ router.patch(
         return res.status(400).json({ message: "Invalid account role" });
       }
 
+      if (isSelf && role !== req.user.role) {
+        return res.status(400).json({ message: "You cannot change your own role" });
+      }
+
       data.role = role;
     }
 
     if (req.body.isActive !== undefined) {
-      data.isActive = Boolean(req.body.isActive);
+      const nextIsActive = booleanValue(req.body.isActive);
+
+      if (isSelf && !nextIsActive) {
+        return res.status(400).json({ message: "You cannot deactivate your own account" });
+      }
+
+      data.isActive = nextIsActive;
     }
 
     const user = await prisma.user.update({
@@ -139,6 +162,10 @@ router.delete(
   requireAuth,
   requireAdmin,
   asyncHandler(async (req, res) => {
+    if (req.params.id === req.user.id) {
+      return res.status(400).json({ message: "You cannot deactivate your own account" });
+    }
+
     const user = await prisma.user.update({
       where: { id: req.params.id },
       data: { isActive: false },
