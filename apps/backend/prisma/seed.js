@@ -8,10 +8,8 @@ const DEFAULT_ADMIN_PASSWORD = "Tina1234";
 
 const sampleImages = {
   vehicle: "/listings/benz-kdg-008.jpeg",
-  house:
-    "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
-  land:
-    "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80",
+  house: "/listings/modern-family-house.jpg",
+  land: "/listings/residential-land.jpg",
 };
 
 async function main() {
